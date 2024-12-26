@@ -1,0 +1,124 @@
+#CartDrawer .drawer__scrollable .cart__image .image-element {
+    opacity: 1 !important;
+  }
+  .cart-drawer_upsell .cart_upsell-item {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 20px 10px 4px;
+    column-gap: 20px;
+  }
+  .cart-drawer_upsell .cart_upsell-item .cart-upsell_media img {
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+  }
+  .cart-drawer_upsell .cart_upsell-item .cart-upsell_content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    justify-content: center;
+  }
+  .cart-drawer_upsell .cart_upsell-item ul.upsell_size-options {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 8px;
+    margin: 0;
+  }
+  
+  .cart-drawer_upsell .cart_upsell-item ul.upsell_size-options .size-swatch_item {
+    margin: 0;
+  }
+  .cart-drawer_upsell .cart_upsell-item h5.upsell_title {
+    color: #1c1b1b;
+    font-family: "Asap", sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+  .cart-drawer_upsell .cart_upsell-item .upsell_price {
+    color: #1c1b1b;
+    font-family: "Asap", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+  .cart-drawer_upsell .cart_upsell-item .size-swatch {
+    color: #6a6a6a;
+    text-align: center;
+    font-family: "Asap", sans-serif;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 23.1px;
+    min-width: 18.442px;
+    height: 19px;
+    border: 1px solid #d6d5d3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    letter-spacing: 0;
+    margin-bottom: 0;
+  }
+  .cart-drawer_upsell .cart_upsell-item .upsell_atc-btn {
+    border-radius: 2px;
+    border: 1px solid #000;
+    background: #fff;
+    display: flex;
+    padding: 6px 20px;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    cursor: pointer;
+    color: #000;
+    text-align: center;
+    font-family: "Asap", sans-serif;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 10px;
+    letter-spacing: 0.8px;
+  }
+  .cart-drawer_upsell .swiper-button {
+    width: 10px;
+    height: 20px;
+  }
+  .cart-drawer_upsell .swiper-button-prev {
+    left: 0;
+  }
+  .cart-drawer_upsell .swiper-button-next {
+    right: 0;
+  }
+  .cart-drawer_upsell .size-swatch__Radio:checked + .size-swatch {
+    color: #1c1b1b;
+    border: 1px solid #1c1b1b;
+  }
+  .cart-drawer_upsell .size-swatch__Radio:disabled + .size-swatch {
+    color: #d6d5d3;
+    pointer-events: none;
+    border: 1px solid #d6d5d3;
+    position: relative;
+    overflow: hidden;
+  }
+  .cart-drawer_upsell .size-swatch__Radio:disabled + .size-swatch:after {
+    position: absolute;
+    content: "";
+    top: -19px;
+    left: 50%;
+    transform: rotate(45deg);
+    background: #d6d5d3;
+    z-index: 9;
+    width: 1px;
+    height: 55px;
+  }
+  

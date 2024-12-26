@@ -1,0 +1,129 @@
+<div class="cart-drawer_upsell">
+    <div class="cart_upsell-slider swiper">
+      <div class="swiper-wrapper">
+        {% assign cart_product_ids = '' %}
+        {% for item in cart.items %}
+          {% assign cart_product_ids = cart_product_ids | append: item.product_id | append: ',' %}
+        {% endfor %}
+        {% assign cart_product_ids_array = cart_product_ids | split: ',' | uniq %}
+        {% assign product_ids_array = cart_product_ids_array | json %}
+        {% for item in cart.items %}
+          {% assign upsell_products = item.product.metafields.custom.cart_upsell.value %}
+          {% for u_product in upsell_products %}
+            {% assign cart_array = false %}
+            {% unless product_ids_array contains u_product.id %}
+              {% assign cart_array = true %}
+            {% endunless %}
+            {% if cart_array == true %}
+              <div class="swiper-slide">
+                <div class="cart_upsell-item" data-product-id="{{ u_product.id }}">
+                    <div class="cart-upsell_media">
+                      <a href="{{ u_product.url }}">
+                        {{ u_product.featured_image | image_url: width: 800 | image_tag: class: 'media' }}
+                      </a>
+                    </div>
+                    <div class="cart-upsell_content">
+                      <a href="{{ u_product.url }}">
+                        <h5 class="upsell_title">{{ u_product.title }}</h5>
+                      </a>
+                      <span class="upsell_price">
+                        {{ u_product.price | money }}
+                      </span>
+                      {% if u_product.has_only_default_variant %}
+                        <input
+                          type="radio"
+                          class="size-swatch__Radio"
+                          name="size_product_{{ u_product.id }}"
+                          data-variant="{{  u_product.selected_or_first_available_variant.id }}"
+                          value="{{ u_product.selected_or_first_available_variant.id }}"
+                          checked="checked"
+                          hidden
+                        >
+                      {% else %}
+                        <ul class="upsell_size-options">
+                          {% for option in u_product.options_with_values %}
+                            {% if option.name == 'Größe' %}
+                              {% for value in option.values %}
+                                {% assign variant_id = '' %}
+                                {% for variant in u_product.variants %}
+                                  {% if variant.option1 == value %}
+                                    {% assign variant_id = variant.id %}
+                                  {% endif %}
+                                {% endfor %}
+                                <li class="size-swatch_item">
+                                  {% if u_product.has_only_default_variant %}
+                                    <input
+                                      type="radio"
+                                      class="size-swatch__Radio aa"
+                                      name="size_product_{{ u_product.id }}"
+                                      data-variant="{{ variant_id }}"
+                                      value="{{ value }}"
+                                      id="checked-{{ u_product.id }}-{{ value }}--{{ forloop.index }}"
+                                      {% if forloop.first %}
+                                        checked="checked"
+                                      {% endif %}
+                                      hidden
+                                    >
+                                  {% else %}
+                                    {% assign variant = u_product.variants[forloop.index0] %}
+                                    {% if variant.available %}
+                                      <input
+                                        type="radio"
+                                        class="size-swatch__Radio bb"
+                                        name="size_product_{{ u_product.id }}"
+                                        data-variant="{{ variant_id }}"
+                                        value="{{ value }}"
+                                        id="checked-{{ u_product.id }}-{{ value }}--{{ forloop.index }}"
+                                        {% if forloop.first %}
+                                          checked="checked"
+                                        {% endif %}
+                                        hidden
+                                      >
+                                    {% else %}
+                                      <input
+                                        disabled="true"
+                                        type="radio"
+                                        class="size-swatch__Radio cc"
+                                        name="size_product_{{ u_product.id }}"
+                                        data-variant="{{ variant_id }}"
+                                        value="{{ value }}"
+                                        id="checked-{{ u_product.id }}-{{ value }}--{{ forloop.index }}"
+                                        hidden
+                                        {% if forloop.first %}
+                                          checked="checked"
+                                        {% endif %}
+                                      >
+                                    {% endif %}
+                                  {% endif %}
+                                  <label class="size-swatch" for="checked-{{ u_product.id }}-{{ value }}--{{ forloop.index }}">
+                                    {{ value }}
+                                  </label>
+                                </li>
+                              {% endfor %}
+                            {% endif %}
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                  
+                      <!-- <button class="upsell_atc-btn" id="upsell_atc-btn">HINZUFÜGEN</button> -->
+                      <a class="upsell_atc-btn">HINZUFÜGEN</a>
+                    </div>
+                  </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <div class="swiper-button-next swiper-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 13 22" fill="none">
+          <path d="M1 1L11 11L1 21" stroke="#1C1B1B" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="swiper-button-prev swiper-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 13 22" fill="none">
+          <path d="M12 1L2 11L12 21" stroke="#1C1B1B" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  
